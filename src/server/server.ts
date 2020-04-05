@@ -51,7 +51,6 @@ io.on('connection', client => {
   client.on('cast', (member: Member) => {
     db.update({ id: member.id }, { $set: { vote: member.vote } }, { returnUpdatedDocs: true }, (err, numReplaces, doc: Member) => {
       db.find({ room: doc.room }, (err, docs) => {
-        console.log(doc.room)
         io.in(doc.room).emit('new_cast', docs)
       })
     })

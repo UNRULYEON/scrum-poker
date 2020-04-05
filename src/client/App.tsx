@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react"
 import socketIOClient from "socket.io-client"
 import { List } from 'immutable'
 import { Member, State } from '../typings'
+import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator'
+
+const uniqueNamesConfig: Config = {
+  dictionaries: [adjectives, colors, animals],
+  separator: '-'
+}
 
 const App = (): JSX.Element => {
   const endpoint: string = `${window.location.origin}`
@@ -11,7 +17,7 @@ const App = (): JSX.Element => {
     id: Math.floor(Math.random() * 100001),
     members: List<Member>(),
   })
-  let [ name, setName ] = useState<string>(localStorage.getItem('name') || '')
+  let [ name, setName ] = useState<string>(localStorage.getItem('name') || uniqueNamesGenerator(uniqueNamesConfig))
 
   const updateMemberList = (payload: { id: string, members: Member[] }): void => 
     setState({
@@ -94,14 +100,3 @@ const App = (): JSX.Element => {
 }
 
 export default App
-
-const state = {
-  date: '',
-  members: [
-    {
-      id: 'WpqObdXVnmBvf9CXAAAA',
-      name: 'Amar',
-      vote: ''
-    }
-  ]
-}
