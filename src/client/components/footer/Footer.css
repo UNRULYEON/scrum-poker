@@ -1,0 +1,11 @@
+footer {
+  grid-area: layout_footer;
+  grid-template-areas: '. . footer . .';
+}
+
+#footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

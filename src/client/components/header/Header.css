@@ -1,0 +1,37 @@
+header {
+  grid-area: layout_header;
+  grid-template-areas: '. . header . .';
+  background-color: #F4F4F4;
+}
+
+#header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr;
+}
+
+#header__room-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-style: italic;
+  color: #CBCBCB;
+}
+
+#header__name_and_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#header_buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+#header_buttons > button:first-child {
+  margin-right: 15px;
+}

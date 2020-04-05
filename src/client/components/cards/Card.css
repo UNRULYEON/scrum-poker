@@ -1,0 +1,22 @@
+.card {
+  width: calc(85px - 2px);
+  height: calc(100px - 2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.5em;
+  background-color: #F4F4F4;
+  border: 1px solid rgba(0, 0, 0, .12);
+  border-radius: 4px;
+  transition: .2s ease-in-out;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.card:hover {
+  cursor: pointer;
+}

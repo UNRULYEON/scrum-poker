@@ -4,19 +4,26 @@ import { List } from 'immutable'
 import { Member, State } from '../typings'
 import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator'
 
-const uniqueNamesConfig: Config = {
+import Layout from './components/layout'
+import Header from './components/header'
+import Cards from './components/cards'
+import Members from './components/members'
+import Footer from './components/footer'
+
+export const uniqueNamesConfig: Config = {
   dictionaries: [adjectives, colors, animals],
   separator: '-'
 }
 
 const App = (): JSX.Element => {
   const endpoint: string = `${window.location.origin}`
-  const room: string = window.location.pathname.substr(1)
+  const room: string = window.location.pathname.substr(1).toLowerCase()
   const socket = socketIOClient(endpoint)
   let [ state, setState ] = useState<State>({
     id: Math.floor(Math.random() * 100001),
     members: List<Member>(),
   })
+
   let [ name, setName ] = useState<string>(localStorage.getItem('name') || uniqueNamesGenerator(uniqueNamesConfig))
 
   const updateMemberList = (payload: { id: string, members: Member[] }): void => 
@@ -30,25 +37,6 @@ const App = (): JSX.Element => {
       members: List<Member>(payload)
     }))
 
-  const updateName = (new_name: string): void => {
-    setName(new_name)
-    const member = state.members.find(m => m.id === state.id)
-    const new_member = ({ ...member, name: new_name })
-    localStorage.setItem('name', new_name)
-
-    socket.emit('update_name', new_member)
-  }
-
-  const cast = (vote: string): void => {
-    const member = state.members.find(m => m.id === state.id)
-    const new_member = ({ ...member, vote })
-    socket.emit('cast', new_member)
-  }
-
-  const resetCasts = (): void => {
-    socket.emit('reset', state.members.find(m => m.id === state.id))
-  }
-
   const memberLeft = (payload: Member[]): void => 
     setState(s0 => ({
       ...s0,
@@ -56,7 +44,6 @@ const App = (): JSX.Element => {
     }))
 
   useEffect(() => {
-    console.log(`Location: ${endpoint}`)
     const member: Omit<Member, '_id'> = {
       id: state.id,
       name,
@@ -84,18 +71,12 @@ const App = (): JSX.Element => {
   }, [])
   
   return (
-    <div>
-      <main>
-        <input value={name} onChange={e => updateName(e.target.value)} />
-        <button onClick={() => cast('10')}>send</button><br/>
-        <button onClick={() => resetCasts()}>reset</button><br/>
-        {state.members.map((member, key) => (
-          <React.Fragment key={key}>
-            <span>{member.id} - {member.name} - {member.vote}</span><br/>
-          </ React.Fragment>
-        ))}
-      </main>
-    </div>
+    <Layout>
+      <Header name={name} setName={setName} state={state} socket={socket} />
+      <Cards state={state} socket={socket} />
+      <Members members={state.members} state={state} socket={socket} />
+      <Footer />
+    </Layout>
   )
 }
 

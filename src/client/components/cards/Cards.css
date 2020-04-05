@@ -1,0 +1,43 @@
+#cards-container {
+  grid-area: layout_cards;
+  background-color: #FAFBFC;
+}
+
+#deck-select {
+  margin: 15px 0;
+  display: grid;
+  grid-template-areas: '. . deck_select . .';
+}
+
+#deck-select-container {
+  grid-area: deck_select;
+}
+
+#cards {
+  margin: 0 auto;
+  width: min-content;
+  display: grid;
+  grid-template-columns: auto;
+  grid-column-gap: 20px;
+  grid-template-rows: 1fr;
+  grid-auto-flow: column;
+  overflow: hidden;
+  max-width: min-content;
+}
+
+@media only screen and (max-width: 1345px) {
+  #cards {
+    margin: 0 30px;
+    width: calc(100vw - 60px);
+    overflow: scroll;
+  }
+}
+
+
+@media only screen and (max-width: 1345px) {
+  #cards {
+    margin: 0 20px;
+    width: calc(100vw - 40px);
+    overflow: scroll;
+  }
+}

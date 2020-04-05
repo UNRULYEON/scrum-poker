@@ -1,0 +1,31 @@
+#layout {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 150px 200px 1fr 70px;
+  grid-template-areas:
+  'layout_header'
+  'layout_cards'
+  'layout_members'
+  'layout_footer';
+}
+
+.base-layout { 
+  display: grid;
+  grid-template-columns: 1fr 30px 700px 30px 1fr;
+}
+
+@media only screen and (max-width: 760px) {
+  .base-layout { 
+    display: grid;
+    grid-template-columns: 1fr 30px calc(100% - 60px) 30px 1fr;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .base-layout { 
+    display: grid;
+    grid-template-columns: 1fr 20px calc(100% - 40px) 20px 1fr;
+  }
+}

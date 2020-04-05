@@ -1,0 +1,74 @@
+.member-layout {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    'member_status member_name member_vote'
+    '. member_id member_vote';
+}
+
+.member-layout:first-child {
+  margin-top: 0;
+}
+
+.member-status {
+  grid-area: member_status;
+  align-self: flex-end;
+  justify-self: center;
+  margin-right: 5px;
+}
+
+.member-status-base {
+  margin-bottom: 6px;
+  width: 10px;
+  height: 10px;
+  background-color: rgb(255, 3, 3, .20);
+  border: 1px solid rgb(255, 3, 3);
+  transition: .2s ease-in-out;
+  border-radius: 50%;
+}
+
+.member-status-voted {
+  background-color: rgb(0, 142, 9, .20);
+  border: 1px solid rgb(0, 142, 9);
+  transition: .2s ease-in-out;
+}
+
+.member-name {
+  grid-area: member_name;
+  align-self: flex-end;
+  font-size: 1.2em;
+  text-overflow: ellipsis;
+}
+
+.member-id {
+  grid-area: member_id;
+  color: #CBCBCB;
+}
+
+.member-vote {
+  grid-area: member_vote;
+  justify-self: end;
+  background-color: rgb(255, 3, 3, .20);
+  border: 1px solid rgb(255, 3, 3);
+  transition: .2s ease-in-out;
+}
+
+.member-vote > svg {
+  fill: rgb(255, 3, 3);
+}
+
+.member-vote:hover { 
+  cursor: default;
+}
+
+.member-vote-voted {
+  background-color: rgb(0, 142, 9, .20);
+  border: 1px solid rgb(0, 142, 9);
+  transition: .2s ease-in-out;
+}
+
+.member-vote-voted > svg {
+  fill: rgb(0, 142, 9);
+}

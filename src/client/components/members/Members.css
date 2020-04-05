@@ -1,0 +1,71 @@
+#members-layout {
+  grid-area: layout_members;
+  grid-template-areas: '. . members . .';
+}
+
+#members-container {
+  grid-area: members;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 70px 1fr 50px;
+  grid-template-areas:
+  'members_column_name vote_column_name'
+  'members members'
+  'reset reset';
+}
+
+.column_name {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+#members_column_name {
+  grid-area: members_column_name;
+  align-self: center;
+}
+
+#vote_column_name {
+  grid-area: vote_column_name;
+  align-self: center;
+  justify-self: end;
+}
+
+#members {
+  grid-area: members;
+}
+
+#lonely {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0;
+  height: calc(100% - 120px);
+  text-align: center;
+}
+
+#lonely-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+#lonely-sub {
+  margin-bottom: 15px;
+}
+
+#lonely-link {
+  font-style: italic;
+  padding: 10px 20px;
+  border: 1px solid rgba(0, 0, 0, .12);
+  border-radius: 4px;
+  -webkit-user-select: all;
+  user-select: all;
+}
+
+#reset-container {
+  grid-area: reset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
