@@ -14,6 +14,10 @@ metadata:
     service.beta.kubernetes.io/do-loadbalancer-hostname: "scrum-poker.amar.sh.com"
     # Force SSL
     service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https: "true"
+    # Sticky sessions
+    service.beta.kubernetes.io/do-loadbalancer-sticky-sessions-type: "cookies"
+    service.beta.kubernetes.io/do-loadbalancer-sticky-sessions-cookie-name: "route"
+    service.beta.kubernetes.io/do-loadbalancer-sticky-sessions-cookie-ttl: "60"
 spec:
   selector:
     app: scrum-poker
