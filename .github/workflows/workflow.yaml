@@ -17,12 +17,13 @@ jobs:
     - name: Build container image
       run: docker build -t registry.digitalocean.com/scrum-poker/scrum-poker:$(echo $GITHUB_SHA | head -c7) .
 
-    - name: DigitalOcean Registry Login
+    - name: Install doctl
       uses: digitalocean/action-doctl@v2-experiment
-      env:
-        DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       with:
-        args: registry login
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        
+    - name: DigitalOcean Registry Login
+      run: doctl registry login
 
     - name: Push image to DigitalOcean Registry
       run: docker push registry.digitalocean.com/scrum-poker/scrum-poker:$(echo $GITHUB_SHA | head -c7)
