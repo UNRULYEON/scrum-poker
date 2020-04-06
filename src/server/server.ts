@@ -16,15 +16,17 @@ app.get('/health', (_, res) => {
   res.sendStatus(200)
 })
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.redirect(randomWords(4).join('-'))
 })
 
 app.use(express.static('public'))
 
-app.get('/:id', function (req, res) {
+app.get('/:id', (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/index.html'))
 })
+
+app.get('/health', (_, res) => res.sendStatus(200))
 
 io.on('connection', client => {
   // Join a room based on the pathname
