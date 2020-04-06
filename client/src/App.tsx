@@ -18,7 +18,9 @@ export const uniqueNamesConfig: Config = {
 const App = (): JSX.Element => {
   const endpoint: string = `${window.location.origin}`
   const room: string = window.location.pathname.substr(1).toLowerCase()
-  const socket = socketIOClient(endpoint)
+  const socket = socketIOClient(endpoint, {
+    secure: true
+  })
   let [ state, setState ] = useState<State>({
     id: Math.floor(Math.random() * 100001),
     members: List<Member>(),
