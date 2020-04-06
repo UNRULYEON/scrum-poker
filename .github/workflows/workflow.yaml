@@ -35,7 +35,7 @@ jobs:
       run: doctl kubernetes cluster kubeconfig show k8s-scrum-poker > $GITHUB_WORKSPACE/.kubeconfig
 
     - name: Deploy to DigitalOcean Kubernetes
-      run: doctl kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig apply -f $GITHUB_WORKSPACE/config/deployment.yaml
+      run: kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig apply -f $GITHUB_WORKSPACE/config/deployment.yaml
 
     - name: Verify deployment
-      run: doctl kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig rollout status deployment/do-manager-oath-callback-production
+      run: kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig rollout status deployment/do-manager-oath-callback-production
