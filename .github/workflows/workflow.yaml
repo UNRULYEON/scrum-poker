@@ -15,7 +15,6 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build container image
-      env:
       run: docker build -t registry.digitalocean.com/scrum-poker/scrum-poker:$(echo $GITHUB_SHA | head -c7) .
 
     - name: DigitalOcean Registry Login
