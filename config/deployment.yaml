@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scrum-poker-production
+  labels:
+    app: scrum-poker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: scrum-poker
+  template:
+    metadata:
+      labels:
+        app: scrum-poker
+    spec:
+      containers:
+        - name: scrum-poker
+          image: <IMAGE>
+          ports:
+            - containerPort: 5000
+      imagePullSecrets:
+        - name: scrum-poker-regcred

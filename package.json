@@ -9,9 +9,13 @@
   "private": false,
   "scripts": {
     "start": "npx ts-node server.ts",
-    "build": "npx tsc"
+    "build": "npx tsc",
+    "start:prod": "node build/server.js"
   },
   "dependencies": {
+    "@types/node": "^12.7.3",
+    "@types/socket.io": "^2.1.4",
+    "@types/express": "^4.17.1",
     "express": "^4.16.4",
     "immutable": "^4.0.0-rc.12",
     "nedb": "^1.8.0",
@@ -22,9 +26,6 @@
     "unique-names-generator": "^4.2.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.1",
-    "@types/nedb": "^1.8.9",
-    "@types/node": "^12.7.3",
-    "@types/socket.io": "^2.1.4"
+    "@types/nedb": "^1.8.9"
   }
 }

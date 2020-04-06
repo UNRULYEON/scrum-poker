@@ -1,7 +1,8 @@
 name: Deploy to production K8s cluster
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - master
 
 jobs:
 
@@ -15,21 +16,20 @@ jobs:
 
     - name: Build container image
       env:
-        CLIENT_ID: ${{ secrets.CLIENT_ID }}
-        SERVER_PORT: ${{ secrets.SERVER_PORT }}
-      run: docker build --build-arg CLIENT_ID=$CLIENT_ID --build-arg SERVER_PORT=$SERVER_PORT -t docker.pkg.github.com/unrulyeon/do-manager-oath-callback/do-manager-oath-callback:$(echo $GITHUB_SHA | head -c7) .
+      run: docker build -t registry.digitalocean.com/scrum-poker/scrum-poker:$(echo $GITHUB_SHA | head -c7) .
 
-    - name: GPR Login
+    - name: DigitalOcean Registry Login
+      uses: digitalocean/action-doctl@master
       env:
-        GITHUB_USERNAME: ${{ github.actor }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: docker login -u $GITHUB_USERNAME -p $GITHUB_TOKEN docker.pkg.github.com
+        DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      with:
+        args: doctl registry login
 
-    - name: Push image to GPR
-      run: docker push docker.pkg.github.com/unrulyeon/do-manager-oath-callback/do-manager-oath-callback:$(echo $GITHUB_SHA | head -c7)
+    - name: Push image to DigitalOcean Registry
+      run: docker push registry.digitalocean.com/scrum-poker/scrum-poker:$(echo $GITHUB_SHA | head -c7)
 
     - name: Update deployment file
-      run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|docker.pkg.github.com/unrulyeon/do-manager-oath-callback/do-manager-oath-callback:'${TAG}'|' $GITHUB_WORKSPACE/config/deployment.yaml
+      run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|registry.digitalocean.com/scrum-poker/scrum-poker:'${TAG}'|' $GITHUB_WORKSPACE/config/deployment.yaml
 
     - name: Save DigitalOcean kubeconfig
       uses: digitalocean/action-doctl@master
