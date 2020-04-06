@@ -7,8 +7,6 @@ metadata:
     service.beta.kubernetes.io/do-loadbalancer-protocol: "http"
     service.beta.kubernetes.io/do-loadbalancer-healthcheck-path: "/health"
     # SSL
-    service.beta.kubernetes.io/do-loadbalancer-protocol: "http"
-    service.beta.kubernetes.io/do-loadbalancer-algorithm: "round_robin"
     service.beta.kubernetes.io/do-loadbalancer-tls-ports: "443"
     service.beta.kubernetes.io/do-loadbalancer-certificate-id: "1e56c7f0-b51a-47c1-a254-15a156db9132"
     service.beta.kubernetes.io/do-loadbalancer-hostname: "scrum-poker.amar.sh.com"
