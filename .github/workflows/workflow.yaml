@@ -32,7 +32,7 @@ jobs:
       run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|registry.digitalocean.com/scrum-poker/scrum-poker:'${TAG}'|' $GITHUB_WORKSPACE/config/deployment.yaml
 
     - name: Save DigitalOcean kubeconfig
-      run: doctl kubernetes cluster kubeconfig show do-ams3-k8s-scrum-poker > $GITHUB_WORKSPACE/.kubeconfig
+      run: doctl kubernetes cluster kubeconfig show k8s-scrum-poker > $GITHUB_WORKSPACE/.kubeconfig
 
     - name: Deploy to DigitalOcean Kubernetes
       run: doctl kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig apply -f $GITHUB_WORKSPACE/config/deployment.yaml
