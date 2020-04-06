@@ -18,7 +18,7 @@ jobs:
       run: docker build -t registry.digitalocean.com/scrum-poker/scrum-poker:$(echo $GITHUB_SHA | head -c7) .
 
     - name: DigitalOcean Registry Login
-      uses: digitalocean/action-doctl@master
+      uses: digitalocean/action-doctl@v2-experiment
       env:
         DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       with:
