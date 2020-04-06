@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { fibonacci } from './decks'
 import Card from './card'
 import { InputLabel, Select, MenuItem } from '@material-ui/core'
-import { State } from '../../../typings'
+import { State } from '../../../../typings'
 
 import './Cards.css'
 

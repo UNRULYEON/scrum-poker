@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import socketIOClient from "socket.io-client"
 import { List } from 'immutable'
-import { Member, State } from '../typings'
+import { Member, State } from '../../typings'
 import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator'
 
 import Layout from './components/layout'

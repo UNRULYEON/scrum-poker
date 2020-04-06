@@ -1,5 +1,5 @@
 import React from 'react'
-import { State } from '../../../typings'
+import { State } from '../../../../typings'
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import { uniqueNamesGenerator } from 'unique-names-generator';

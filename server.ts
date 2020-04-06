@@ -2,15 +2,16 @@ import express = require('express')
 import * as http from 'http'
 import socketIO = require('socket.io')
 import * as path from 'path'
-import * as randomWords from 'random-words'
+const randomWords = require('random-words')
 import Datastore = require('nedb')
 
-import { Member, State } from '../typings'
+import { Member, State } from './typings'
 
 const app = express()
 const server = http.createServer(app)
 const io = socketIO(server)
 const db = new Datastore()
+
 
 app.get('/health', (_, res) => {
   res.sendStatus(200)
@@ -20,10 +21,10 @@ app.get('/', (req, res) => {
   res.redirect(randomWords(4).join('-'))
 })
 
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, './build/frontend')))
 
 app.get('/:id', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../public/index.html'))
+  res.sendFile(path.join(__dirname, './build/frontend/index.html'))
 })
 
 app.get('/health', (_, res) => res.sendStatus(200))

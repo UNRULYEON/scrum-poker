@@ -1,5 +1,5 @@
 import React from 'react'
-import { Member, State } from '../../../typings'
+import { Member, State } from '../../../../typings'
 import { List } from 'immutable'
 import { Button } from '@material-ui/core'
 
