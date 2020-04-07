@@ -11,6 +11,7 @@ const app = express()
 const server = http.createServer(app)
 const io = socketIO(server)
 const db = new Datastore()
+const port = process.env.PORT || 8080
 
 app.get('/health', (_, res) => {
   res.sendStatus(200)
@@ -83,4 +84,4 @@ io.on('connection', client => {
   })
 })
 
-server.listen(5000, () => console.log('Your app is listening on port ' + 5000))
+server.listen(port, () => console.log('Your app is listening on port ' + port))
