@@ -8,9 +8,9 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "npx ts-node server.ts",
-    "build": "npx tsc",
-    "start:prod": "node build/server.js"
+    "start": "node build/server.js",
+    "start:dev": "npx ts-node server.ts",
+    "build": "mkdir build && npx tsc"
   },
   "dependencies": {
     "@types/node": "^12.7.3",

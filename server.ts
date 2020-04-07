@@ -20,10 +20,10 @@ app.get('/', (req, res) => {
   res.redirect(randomWords(4).join('-'))
 })
 
-app.use(express.static(path.join(__dirname, './frontend')))
+app.use(express.static(path.join(__dirname, './build/frontend')))
 
 app.get('/:id', (req, res) => {
-  res.sendFile(path.join(__dirname, './frontend/index.html'))
+  res.sendFile(path.join(__dirname, './build/frontend/index.html'))
 })
 
 app.get('/health', (_, res) => res.sendStatus(200))
