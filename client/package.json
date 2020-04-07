@@ -18,7 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && rm -rf ../build/frontend && mv ./build ../build/frontend",
-    "build:docker": "react-scripts build && mv ./build/* ../build/frontend"
+    "build:heroku": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
