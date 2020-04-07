@@ -10,8 +10,8 @@
   "scripts": {
     "start": "node build/server.js",
     "start:dev": "npx ts-node server.ts",
-    "build": "mkdir build && npx tsc",
-    "heroku-postbuild": "cd client && yarn && yarn run build:heroku && cd ../ && mv ./client/build ./build/frontend"
+    "build": "npx tsc",
+    "heroku-postbuild": "npx tsc && mkdir build/frontend && cd client && yarn && yarn run build:heroku && cd ../ && mv ./client/build ./build/frontend"
   },
   "dependencies": {
     "@types/node": "^12.7.3",
