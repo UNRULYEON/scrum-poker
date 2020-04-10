@@ -28,3 +28,5 @@ You can deploy your own instance on heroku:
 
 
 ## License
+
+[MIT](./LICENSE)
