@@ -1,0 +1,6 @@
+{
+  "name": "scrum-poker",
+  "description": "Online scrum poker for agile teams",
+  "repository": "https://github.com/UNRULYEON/scrum-poker",
+  "keywords": ["node", "express", "react", "websocket", "socket.io", "scrum", "poker"]
+}
