@@ -24,6 +24,7 @@ If you'd like to run this in production, create a `build` directory in the root 
 ## Deploy on Heroku
 
 You can deploy your own instance on heroku:
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 
