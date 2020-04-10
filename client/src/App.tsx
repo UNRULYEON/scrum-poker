@@ -3,6 +3,8 @@ import socketIOClient from "socket.io-client"
 import { List } from 'immutable'
 import { Member, State } from '../../typings'
 import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator'
+import ReactGA from 'react-ga';
+import GAConfig from './ga'
 
 import Layout from './components/layout'
 import Header from './components/header'
@@ -15,8 +17,11 @@ export const uniqueNamesConfig: Config = {
   separator: '-'
 }
 
+ReactGA.initialize(GAConfig.trackingCode)
+ReactGA.pageview(window.location.pathname)
+
 const App = (): JSX.Element => {
-  const endpoint: string = `${window.location.origin}`
+  const endpoint: string = `${process.env.NODE_ENV !== 'development' ? window.location.origin : 'http://localhost:8080'}`
   const room: string = window.location.pathname.substr(1).toLowerCase()
   const socket = socketIOClient(endpoint, {
     secure: true,
