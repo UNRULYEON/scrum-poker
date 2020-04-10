@@ -1,3 +1,3 @@
 export default {
-  trackingCode: ''
+  trackingCode: 'UA-140854748-2'
 }
