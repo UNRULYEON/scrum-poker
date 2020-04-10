@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 app.use(express.static(path.join(__dirname, process.env.NODE_ENV === 'production' ? './frontend' : './build/frontend')))
 
 app.get('/:id', (req, res) => {
-  res.sendFile(path.join(__dirname, process.env.NODE_ENV === 'production' ? './frontend' : './build/frontend/index.html'))
+  res.sendFile(path.join(__dirname, process.env.NODE_ENV === 'production' ? './frontend/index.html' : './build/frontend/index.html'))
 })
 
 app.get('/health', (_, res) => res.sendStatus(200))
