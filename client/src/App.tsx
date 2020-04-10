@@ -11,6 +11,7 @@ import Header from './components/header'
 import Cards from './components/cards'
 import Members from './components/members'
 import Footer from './components/footer'
+import SPSnackbar, { SnackbarType } from "./components/snackbar"
 
 export const uniqueNamesConfig: Config = {
   dictionaries: [adjectives, colors, animals],
@@ -23,6 +24,17 @@ ReactGA.pageview(window.location.pathname)
 const App = (): JSX.Element => {
   const endpoint: string = `${process.env.NODE_ENV !== 'development' ? window.location.origin : 'http://localhost:8080'}`
   const room: string = window.location.pathname.substr(1).toLowerCase()
+  const [ snackbar, setSnackbar ] = useState<SnackbarType['state']>({
+    open: false,
+    message: '',
+    severity: 'info',
+    origin: {
+      vertical: 'top',
+      horizontal: 'center'
+    },
+    handleClose: () => {},
+    autoHideDuration: 5000
+  })
   const socket = socketIOClient(endpoint, {
     secure: true,
     transports: [ 'websocket' ]
@@ -33,6 +45,10 @@ const App = (): JSX.Element => {
   })
 
   let [ name, setName ] = useState<string>(localStorage.getItem('name') || uniqueNamesGenerator(uniqueNamesConfig))
+
+  const closeSnackbar = () => {
+    setSnackbar(s0 => ({ ...s0, open: false }))
+  }
 
   const updateMemberList = (payload: { id: string, members: Member[] }): void => 
     setState({
@@ -76,6 +92,32 @@ const App = (): JSX.Element => {
 
     // Update local member list because a member disconnected
     socket.on('member_left', (data: Member[]) => memberLeft(data))
+
+
+    socket.on('disconnect', (reason: string) => {
+      if (reason === 'io server disconnect' || reason === 'transport close') {
+        setSnackbar({
+          ...snackbar,
+          open: true,
+          message: `Disconnected. Automatically trying to reconnect...`,
+          severity: 'error',
+          autoHideDuration: null,
+          handleClose: setSnackbar
+        })
+      }
+    })
+
+    socket.on('reconnect', (attemptNumber: number) => {
+      socket.emit('join', member)
+      setSnackbar({
+        ...snackbar,
+        open: true,
+        message: `You're reconnected.`,
+        severity: 'success',
+        handleClose: setSnackbar
+      })
+    })
+
   }, [])
   
   return (
@@ -84,6 +126,7 @@ const App = (): JSX.Element => {
       <Cards state={state} socket={socket} />
       <Members members={state.members} state={state} socket={socket} />
       <Footer />
+      <SPSnackbar state={snackbar} />
     </Layout>
   )
 }
