@@ -5,6 +5,7 @@ import { InputLabel, Select, MenuItem } from '@material-ui/core'
 import { State } from '../../../../typings'
 
 import './Cards.css'
+import { useTranslation } from 'react-i18next'
 
 export type Card = {
   value: string
@@ -36,7 +37,8 @@ type CardsProps = {
 
 const Cards = (props : CardsProps): JSX.Element => {
   const { state, socket } = props
-  const [ cardState, setCardState ] = useState<CardsState>(initialState)
+  const [ cardState ] = useState<CardsState>(initialState)
+  const { t } = useTranslation()
 
   const getClassName = (value: string): string => {
     const member = state.members.find(m => m.id === state.id)
@@ -47,7 +49,7 @@ const Cards = (props : CardsProps): JSX.Element => {
     <div id="cards-container">
       <div className="base-layout" id="deck-select">
         <div id="deck-select-container">
-          <InputLabel id="deck-select-label">DECK</InputLabel>
+          <InputLabel id="deck-select-label">{t('deck').toUpperCase()}</InputLabel>
           <Select
             labelId="deck-select-label"
             value={cardState.currentDeck.name}

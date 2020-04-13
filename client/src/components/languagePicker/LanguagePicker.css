@@ -1,0 +1,13 @@
+.languange-picker-button {
+  max-height: 26px;
+}
+
+.languange-picker-button > svg {
+  margin-top: -1px;
+  border: 1px solid rgba(0, 0, 0, .12);
+  height: 26px;
+}
+
+.language-picker-item {
+  min-width: 250px;
+}

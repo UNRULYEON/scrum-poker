@@ -2,8 +2,9 @@ import React from 'react'
 import { State } from '../../../../typings'
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
-import { uniqueNamesGenerator } from 'unique-names-generator';
+import { uniqueNamesGenerator } from 'unique-names-generator'
 import { uniqueNamesConfig } from '../../App'
+import { useTranslation } from 'react-i18next'
 
 import './Header.css'
 
@@ -16,6 +17,7 @@ type HeaderProps = {
 
 const Header = (props: HeaderProps): JSX.Element => {
   const { name, setName, state, socket } = props
+  const { t } = useTranslation()
 
   const updateName = (new_name: string): void => {
     setName(new_name)
@@ -35,15 +37,15 @@ const Header = (props: HeaderProps): JSX.Element => {
         <div id="header__name_and_buttons">
           <TextField
             id="name"
-            label="NAME"
+            label={t('name').toUpperCase()}
             variant="outlined"
             value={name}
             onBlur={e => e.target.value.length <= 0 && updateName(uniqueNamesGenerator(uniqueNamesConfig))}
             onChange={e => updateName(e.target.value)}
           />
           <div id="header_buttons">
-            <Button variant="contained" disableElevation onClick={_ => window.location.href = window.location.origin}>New room</Button>
-            {/* <Button variant="contained">Themes</Button> */}
+            <Button variant="contained" disableElevation onClick={_ => window.location.href = window.location.origin}>{t('new_room')}</Button>
+            {/* <Button variant="contained">{t('themes')}</Button> */}
           </div>
         </div>
       </div>

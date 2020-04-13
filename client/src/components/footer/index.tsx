@@ -1,5 +1,6 @@
 import React from 'react'
 import AboutDialog from '../aboutDialog'
+import LanguagePicker from '../languagePicker'
 
 import './Footer.css'
 
@@ -14,6 +15,8 @@ const Footer = (): JSX.Element => {
         </a>
         <div className="footer-divider footer-divider-logo" />
         <AboutDialog />
+        <div className="footer-divider" />
+        <LanguagePicker />
       </div>
     </footer>
   )

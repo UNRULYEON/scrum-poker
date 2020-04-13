@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import Typography from '@material-ui/core/Typography'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTranslation } from 'react-i18next';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -61,6 +62,7 @@ const AboutDialog = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(JSON.parse(localStorage.getItem('about_dialog') || 'true'))
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'))
+  const { t } = useTranslation()
 
   const closeAboutDialog = (close: false): void => {
     localStorage.setItem('about_dialog', JSON.stringify(false))
@@ -69,42 +71,41 @@ const AboutDialog = (): JSX.Element => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>About</Button>
+      <Button onClick={() => setOpen(true)}>{t('about')}</Button>
       <Dialog onClose={() => closeAboutDialog(false)} aria-labelledby="about-dialog-title" open={open} fullScreen={fullScreen}>
         <AboutDialogTitle id="about-dialog-title" onClose={() => closeAboutDialog(false)}>
-          About scrum-poker
+          {t('about_dialog.title')}
         </AboutDialogTitle>
         <AboutDialogContent dividers>
           <Typography variant="h6">
-            What is this?
+            {t('about_dialog.t1')}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            You can use this app to play scrum poker with you team if you can't meet all in a physical way.
+            {t('about_dialog.p1')}
           </Typography>
 
           <Typography variant="h6">
-            How does it work?
+            {t('about_dialog.t2')}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            When you go to <em>{window.location.origin}</em>, you're automatically assigned to a room. When you go to the link
-            you've got from your team member, you join his or her room.
+            {t('about_dialog.p2', { url: `${window.location.origin}`, interpolation: { escapeValue: false } })}
           </Typography>
 
           <Typography variant="h6">
-            How do I play?
+            {t('about_dialog.t3')}
           </Typography>
           <Typography variant="body1" gutterBottom>
             <ol>
-              <li>Rename yourself to whatever you want. This will be saved locally for you next session.</li>
-              <li>Share the link with you team members so they can join.</li>
-              <li>Wait for everyone to pick a card.</li>
-              <li>Once your discussion is over, hit "RESET VOTES" to play again.</li>
+              <li>{t('about_dialog.p3l.l1')}</li>
+              <li>{t('about_dialog.p3l.l2')}</li>
+              <li>{t('about_dialog.p3l.l3')}</li>
+              <li>{t('about_dialog.p3l.l4')}</li>
             </ol>
           </Typography>
         </AboutDialogContent>
         <AboutDialogActions>
           <Button autoFocus onClick={() => closeAboutDialog(false)}>
-            Close
+            {t('dialog.close')}
           </Button>
         </AboutDialogActions>
       </Dialog>
