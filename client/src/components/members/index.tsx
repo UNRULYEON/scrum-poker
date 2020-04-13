@@ -6,6 +6,7 @@ import { Button } from '@material-ui/core'
 import './Members.css'
 import './Member.css'
 import Card from '../cards/card'
+import { useTranslation } from 'react-i18next'
 
 type MembersProps = {
   members: List<Member>
@@ -15,6 +16,7 @@ type MembersProps = {
 
 const Members = (props: MembersProps): JSX.Element => {
   const { members, state, socket } = props
+  const { t } = useTranslation()
   
   const resetti = (): void => {
     socket.emit('reset', state.members.find(m => m.id === state.id))
@@ -23,22 +25,22 @@ const Members = (props: MembersProps): JSX.Element => {
   return (
     <div className="base-layout" id="members-layout">
       <div id="members-container">
-        <span id="members_column_name" className="column_name">MEMBERS</span>
-        <span id="vote_column_name" className="column_name">VOTES</span>
+        <span id="members_column_name" className="column_name">{t('members').toUpperCase()}</span>
+        <span id="vote_column_name" className="column_name">{t('votes').toUpperCase()}</span>
         <div id="members">
           {members.map((member, key) => (
             <MemberComp key={key} member={member} members={members} />
           ))}
           {members.size <= 1 &&
             <div id="lonely">
-              <span id="lonely-title">LOOKS LIKE YOU'RE LONELY</span>
-              <span id="lonely-sub">SHARE THIS LINK TO MAKE FRIENDS:</span>
+              <span id="lonely-title">{t('members_empty_state.title').toUpperCase()}</span>
+              <span id="lonely-sub">{t('members_empty_state.subtitle').toUpperCase()}</span>
               <span id="lonely-link">{window.location.href}</span>
             </div>
           }
         </div>
         <div id="reset-container">
-          <Button variant="contained" disableElevation onClick={_ => resetti()} disabled={members.filter(mem => mem.vote.length <= 0).size === members.size}>Reset votes</Button>
+          <Button variant="contained" disableElevation onClick={_ => resetti()} disabled={members.filter(mem => mem.vote.length <= 0).size === members.size}>{t('reset_votes').toUpperCase()}</Button>
         </div>
       </div>
     </div>

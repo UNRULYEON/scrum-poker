@@ -5,6 +5,7 @@ import { Member, State } from '../../typings'
 import { uniqueNamesGenerator, Config, adjectives, colors, animals } from 'unique-names-generator'
 import ReactGA from 'react-ga';
 import GAConfig from './ga'
+import { useTranslation } from "react-i18next"
 
 import Layout from './components/layout'
 import Header from './components/header'
@@ -39,16 +40,12 @@ const App = (): JSX.Element => {
     secure: true,
     transports: [ 'websocket' ]
   })
-  let [ state, setState ] = useState<State>({
+  const [ state, setState ] = useState<State>({
     id: Math.floor(Math.random() * 100001),
     members: List<Member>(),
   })
-
-  let [ name, setName ] = useState<string>(localStorage.getItem('name') || uniqueNamesGenerator(uniqueNamesConfig))
-
-  const closeSnackbar = () => {
-    setSnackbar(s0 => ({ ...s0, open: false }))
-  }
+  const [ name, setName ] = useState<string>(localStorage.getItem('name') || uniqueNamesGenerator(uniqueNamesConfig))
+  const { t } = useTranslation()
 
   const updateMemberList = (payload: { id: string, members: Member[] }): void => 
     setState({
@@ -99,7 +96,7 @@ const App = (): JSX.Element => {
         setSnackbar({
           ...snackbar,
           open: true,
-          message: `Disconnected. Automatically trying to reconnect...`,
+          message: `${t('status.disconnected')}`,
           severity: 'error',
           autoHideDuration: null,
           handleClose: setSnackbar
@@ -112,12 +109,12 @@ const App = (): JSX.Element => {
       setSnackbar({
         ...snackbar,
         open: true,
-        message: `You're reconnected.`,
+        message: `${t('status.reconnected')}`,
         severity: 'success',
         handleClose: setSnackbar
       })
     })
-
+    // eslint-disable-next-line
   }, [])
   
   return (
