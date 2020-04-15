@@ -8,6 +8,7 @@ export const fibonacci: Deck = {
     { value: '1', numeric_value: 1, addable: true },
     { value: '2', numeric_value: 2, addable: true },
     { value: '3', numeric_value: 3, addable: true },
+    { value: '5', numeric_value: 5, addable: true },
     { value: '8', numeric_value: 8, addable: true },
     { value: '13', numeric_value: 13, addable: true },
     { value: '20', numeric_value: 20, addable: true },
