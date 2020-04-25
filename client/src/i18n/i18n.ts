@@ -2,24 +2,20 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
 import {
-  en, en_flag,
-  nl, nl_flag,
+  en,
+  nl,
 } from './languages'
 
-type Language = {
-  code: string,
-  name: string,
-  nativeName: string,
-  flag: () => JSX.Element
-}
-
-// Flags from: https://github.com/hjnilsson/country-flags
-export const languages: Language[] = [
-  { code: 'en', name: 'English', nativeName: 'English', flag: en_flag },
-  { code: 'nl', name: 'Dutch', nativeName: 'Nederlands', flag: nl_flag },
-]
+export const resources = {
+  en,
+  nl
+};
 
 export type Translation = {
+  code: string
+  name: string
+  nativeName: string
+  IETFTag: string
   translation: {
     name: string
     new_room: string
@@ -66,10 +62,7 @@ i18n
     fallbackLng: 'en',
     lng: localStorage.getItem('language') || 'en',
     debug: !process.env.NODE_ENV || process.env.NODE_ENV === 'development',
-    resources: {
-      en,
-      nl
-    }
+    resources
   })
 
 export default i18n
