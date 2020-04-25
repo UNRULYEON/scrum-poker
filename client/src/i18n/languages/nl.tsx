@@ -1,7 +1,10 @@
 import { Translation }  from '../i18n'
-import React from 'react'
 
 export const nl =  {
+  code: 'nl',
+  name: 'Dutch',
+  nativeName: 'Nederlands',
+  IETFTag: 'NL',
   translation: {
     name: `Naam`,
     new_room: `Nieuwe kamer`,
@@ -41,9 +44,3 @@ export const nl =  {
     }
   }
 } as Translation
-
-export const nl_flag = () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6">
-  <rect fill="#21468B" width="9" height="6"/>
-  <rect fill="#FFF" width="9" height="4"/>
-  <rect fill="#AE1C28" width="9" height="2"/>
-</svg>

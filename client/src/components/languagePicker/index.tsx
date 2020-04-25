@@ -7,7 +7,8 @@ import CloseIcon from '@material-ui/icons/Close'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Dialog, Button, RadioGroup, FormControlLabel, Radio, Typography, IconButton } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
-import { languages } from '../../i18n/i18n'
+import countryCodeToFlagEmoji from 'country-code-to-flag-emoji'
+import { resources, Translation } from '../../i18n/i18n'
 
 import './LanguagePicker.css'
 
@@ -77,18 +78,11 @@ const LanguagePicker = (): JSX.Element => {
     setValue(val)
   }
 
-  const getFlag = (): JSX.Element => {
-    let currLang = languages.find(lang => lang.code === value)
-    if (typeof currLang !== 'undefined')
-      return currLang.flag()
-    return <></>    
-  }
-
   return (
     <>
       <div>
         <Button onClick={() => setOpen(true)}>
-          <div className="languange-picker-button">{getFlag()}</div>
+          {countryCodeToFlagEmoji(resources[value as keyof typeof resources].IETFTag)}
         </Button>
       </div>
       <Dialog onEntering={handleEntering} onClose={() => setOpen(false)} aria-labelledby="about-dialog-title" open={open} fullScreen={fullScreen}>
@@ -103,9 +97,10 @@ const LanguagePicker = (): JSX.Element => {
             value={value}
             onChange={(e)=> changeLanguage(e.target.value)}
           >
-            {languages.map((lang, key) => (
-              <FormControlLabel className="language-picker-item" value={lang.code} key={key} control={<Radio />} label={`${lang.name} - ${lang.nativeName}`} />
-            ))}
+            {Object.keys(resources).map((lang, key) => {
+              const { code, name, nativeName }: Translation = resources[lang as keyof typeof resources]
+              return <FormControlLabel className="language-picker-item" value={code} key={key} control={<Radio />} label={`${name} - ${nativeName}`} />
+            })}
           </RadioGroup>
         </LanguageDialogContent>
         <LanguageDialogActions>
